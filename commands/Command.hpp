@@ -4,6 +4,7 @@
 #include <string>
 #include "../network/Server.hpp"
 #include "../network/Client.hpp"
+#include "../network/Channel.hpp"
 
 class Command
 {
@@ -31,6 +32,14 @@ class SetUsernameCommand : public Command
     public:
         SetUsernameCommand(Server *server, bool authRequired);
         ~SetUsernameCommand();
+        void execute(Client *client, std::vector<std::string> arguments);
+};
+
+class JoinChannelCommand : public Command
+{
+    public:
+        JoinChannelCommand(Server *server);
+        ~JoinChannelCommand();
         void execute(Client *client, std::vector<std::string> arguments);
 };
 

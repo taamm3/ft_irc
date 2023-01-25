@@ -18,6 +18,6 @@ void SetUsernameCommand::execute(Client *client, std::vector<std::string> argume
         return;
     }
     client->setUsername(arguments[0]);
-    client->setRealName(arguments[3]);
+    client->setRealname(arguments[3]);
     client->welcome();
 }
