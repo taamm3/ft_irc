@@ -1,6 +1,7 @@
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
 #include <iostream>
+#include "Channel.hpp"
 
 enum ClientState
 {
@@ -59,6 +60,7 @@ class Client
 
         void welcome();
         void reply(const std::string& reply);
+        void join(Channel *channel);
 
 };
 

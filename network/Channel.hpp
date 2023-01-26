@@ -10,8 +10,11 @@ class Channel
         std::string _name;
         const std::string _key;
         int _maxClients;
+        Client *_admin;
         std::vector<Client*> _clients;
     public:
+        Channel(const std::string& name, const std::string& key, Client *client);
+        ~Channel();
         std::string getPassword() const
         {
             return _key;
@@ -28,7 +31,9 @@ class Channel
         {
             return _name;
         }
+        std::vector<std::string> getNicknames();
 
+        void addClient(Client *client);
 };
 
 #endif

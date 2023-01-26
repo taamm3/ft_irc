@@ -25,6 +25,8 @@ class Server
         }
         Client *getClient(const std::string& nickname);
         Channel *getChannel(const std::string& channelName);
+
+        Channel *createChannel(const std::string& channelName, const std::string& password,Client *client);
 };
 
 #endif

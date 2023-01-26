@@ -37,3 +37,11 @@ Channel *Server::getChannel(const std::string& name)
     }
     return nullptr;
 }
+
+Channel *Server::createChannel(const std::string& channelName,
+                    const std::string& password, Client *client)
+{
+    Channel *channel = new Channel(channelName, password, client);
+    _channels.push_back(channel);
+    return channel;
+}
