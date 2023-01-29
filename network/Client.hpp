@@ -14,6 +14,10 @@ enum ClientState
 class Client
 {
     private:
+        int _fd;
+        std::string _hostname;
+        int _port;
+
         std::string _username;
         std::string _nickname;
         std::string _realname;
@@ -21,6 +25,8 @@ class Client
 
         Channel *_channel;
     public:
+        Client(int fd, const std::string& hostname, int port);
+        ~Client();
         void setNickname(const std::string& nickname)
         {
             _nickname = nickname;
@@ -49,6 +55,14 @@ class Client
         {
             return _state == REGISTERED;
         }
+        void setState(ClientState state)
+        {
+            _state = state;
+        }
+        ClientState getState() const
+        {
+            return _state;
+        }
         void setChannel(Channel *channel)
         {
             _channel = channel;
@@ -57,11 +71,13 @@ class Client
         {
             return _channel;
         }
+        std::string getPrefix() const;
 
         void welcome();
         void reply(const std::string& reply);
         void join(Channel *channel);
-
+        void write(const std::string& message) const;
+        void leave();
 };
 
 #endif

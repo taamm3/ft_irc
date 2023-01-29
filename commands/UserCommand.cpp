@@ -1,11 +1,11 @@
 #include "Command.hpp"
 
-SetUsernameCommand::SetUsernameCommand(Server *server, bool authRequired) :
+UserCommand::UserCommand(Server *server, bool authRequired) :
                             Command(server, authRequired) {}
 
-SetUsernameCommand::~SetUsernameCommand() {}
+UserCommand::~UserCommand() {}
 
-void SetUsernameCommand::execute(Client *client, std::vector<std::string> arguments)
+void UserCommand::execute(Client *client, std::vector<std::string> arguments)
 {
     if (client->isRegistered())
     {
@@ -14,7 +14,7 @@ void SetUsernameCommand::execute(Client *client, std::vector<std::string> argume
     }
     if (arguments.size() < 4)
     {
-        client->reply(ERR_MOREARGSNEEDED(client->getNickname(), "USER"));
+        client->reply(ERR_NEEDMOREPARAMS(client->getNickname(), "USER"));
         return;
     }
     client->setUsername(arguments[0]);

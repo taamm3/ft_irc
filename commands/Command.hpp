@@ -19,27 +19,67 @@ class Command
         virtual void execute(Client *client, std::vector<std::string> arguments) = 0;
 };
 
-class SetNicknameCommand : public Command
+class NickCommand : public Command
 {
     public:
-        SetNicknameCommand(Server *server, bool authRequired);
-        ~SetNicknameCommand();
+        NickCommand(Server *server, bool authRequired);
+        ~NickCommand();
         void execute(Client *client, std::vector<std::string> arguments);
 };
 
-class SetUsernameCommand : public Command
+class UserCommand : public Command
 {
     public:
-        SetUsernameCommand(Server *server, bool authRequired);
-        ~SetUsernameCommand();
+        UserCommand(Server *server, bool authRequired);
+        ~UserCommand();
         void execute(Client *client, std::vector<std::string> arguments);
 };
 
-class JoinChannelCommand : public Command
+class JoinCommand : public Command
 {
     public:
-        JoinChannelCommand(Server *server);
-        ~JoinChannelCommand();
+        JoinCommand(Server *server);
+        ~JoinCommand();
+        void execute(Client *client, std::vector<std::string> arguments);
+};
+
+class PassCommand : public Command
+{
+    public:
+        PassCommand(Server *server, bool authRequired);
+        ~PassCommand();
+        void execute(Client *client, std::vector<std::string> arguments);
+};
+
+class KickCommand : public Command
+{
+    public:
+        KickCommand(Server *server);
+        ~KickCommand();
+        void execute(Client *client, std::vector<std::string> arguments);
+};
+
+class QuitCommand : public Command
+{
+    public:
+        QuitCommand(Server *server, bool authRequired);
+        ~QuitCommand();
+        void execute(Client *client, std::vector<std::string> arguments);
+};
+
+class PartCommand : public Command
+{
+    public:
+        PartCommand(Server *server);
+        ~PartCommand();
+        void execute(Client *client, std::vector<std::string> arguments);
+};
+
+class NoticeCommand : public Command
+{
+    public:
+        NoticeCommand(Server *server);
+        ~NoticeCommand();
         void execute(Client *client, std::vector<std::string> arguments);
 };
 

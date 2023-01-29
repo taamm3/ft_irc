@@ -1,15 +1,15 @@
 #include "Command.hpp"
 
-JoinChannelCommand::JoinChannelCommand(Server *server) :
+JoinCommand::JoinCommand(Server *server) :
                             Command(server) {}
 
-JoinChannelCommand::~JoinChannelCommand() {}
+JoinCommand::~JoinCommand() {}
 
-void JoinChannelCommand::execute(Client *client, std::vector<std::string> arguments)
+void JoinCommand::execute(Client *client, std::vector<std::string> arguments)
 {
     if (arguments.empty())
     {
-        client->reply(ERR_MOREARGSNEEDED(client->getNickname(), "PASS"));
+        client->reply(ERR_NEEDMOREPARAMS(client->getNickname(), "PASS"));
         return;
     }
 
@@ -24,13 +24,11 @@ void JoinChannelCommand::execute(Client *client, std::vector<std::string> argume
     Channel *channel = _server->getChannel(channelName);
     if (!channel)
         channel = _server->createChannel(channelName, password, client);
-    
     if (channel->getMaxClients() > 0 && channel->getNumberOfClients() >= channel->getMaxClients())
     {
-        client->reply(ERR_CHANNELFULL(client->getNickname(), channelName));
+        client->reply(ERR_CHANNELISFULL(client->getNickname(), channelName));
         return;
     }
-
     if (channel->getPassword() != password)
     {
         client->reply(ERR_BADCHANNELKEY(client->getNickname(), channelName));

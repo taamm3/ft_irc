@@ -1,7 +1,7 @@
 #include "Channel.hpp"
 
 Channel::Channel(const std::string& name,const std::string& key, Client *admin) :
-                _name(name), _key(key), _maxClients(0), _admin(admin) {}
+                _name(name), _key(key), _maxClients(0), _admin(admin), noExt(false) {}
 
 Channel::~Channel() {}
 
@@ -22,3 +22,12 @@ void Channel::addClient(Client *client)
     _clients.push_back(client);
 }
 
+void Channel::kick(Client *admin, Client *client, std::string reason)
+{
+
+}
+
+void Channel::broadcast(const std::string& message, Client *client)
+{
+
+}

@@ -12,6 +12,7 @@ class Channel
         int _maxClients;
         Client *_admin;
         std::vector<Client*> _clients;
+        bool noExt;
     public:
         Channel(const std::string& name, const std::string& key, Client *client);
         ~Channel();
@@ -31,9 +32,19 @@ class Channel
         {
             return _name;
         }
+        Client *getAdmin() const
+        {
+            return _admin;
+        }
+        bool isNoExt() const
+        {
+            return noExt;
+        }
         std::vector<std::string> getNicknames();
 
         void addClient(Client *client);
+        void kick(Client *admin, Client *client, std::string reason);
+        void broadcast(const std::string& message, Client *client);
 };
 
 #endif
