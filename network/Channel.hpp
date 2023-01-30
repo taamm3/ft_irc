@@ -8,17 +8,21 @@ class Channel
 {
     private:
         std::string _name;
-        const std::string _key;
+        std::string _key;
         int _maxClients;
         Client *_admin;
         std::vector<Client*> _clients;
-        bool noExt;
+        bool _noExt;
     public:
         Channel(const std::string& name, const std::string& key, Client *client);
         ~Channel();
         std::string getPassword() const
         {
             return _key;
+        }
+        std::string setPassword(std::string password)
+        {
+            _key = password;
         } 
         int getNumberOfClients() const
         {
@@ -27,6 +31,10 @@ class Channel
         int getMaxClients() const
         {
             return _maxClients;
+        }
+        int setMaxClients(int maxClients)
+        {
+            _maxClients = maxClients;
         }
         std::string getName() const
         {
@@ -38,12 +46,17 @@ class Channel
         }
         bool isNoExt() const
         {
-            return noExt;
+            return _noExt;
+        }
+        bool setNoExt(bool state)
+        {
+            _noExt = state;
         }
         std::vector<std::string> getNicknames();
 
         void addClient(Client *client);
         void kick(Client *admin, Client *client, std::string reason);
+        void broadcast(const std::string& message);
         void broadcast(const std::string& message, Client *client);
 };
 

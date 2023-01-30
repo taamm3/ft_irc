@@ -5,6 +5,7 @@
 #include "../network/Server.hpp"
 #include "../network/Client.hpp"
 #include "../network/Channel.hpp"
+#include "../utils.hpp"
 
 class Command
 {
@@ -80,6 +81,38 @@ class NoticeCommand : public Command
     public:
         NoticeCommand(Server *server);
         ~NoticeCommand();
+        void execute(Client *client, std::vector<std::string> arguments);
+};
+
+class PrivMsgCommand : public Command
+{
+    public:
+        PrivMsgCommand(Server *server);
+        ~PrivMsgCommand();
+        void execute(Client *client, std::vector<std::string> arguments);
+};
+
+class ModeCommand : public Command
+{
+    public:
+        ModeCommand(Server *server);
+        ~ModeCommand();
+        void execute(Client *client, std::vector<std::string> arguments);
+};
+
+class PingCommand : public Command
+{
+    public:
+        PingCommand(Server *server);
+        ~PingCommand();
+        void execute(Client *client, std::vector<std::string> arguments);
+};
+
+class PongCommand : public Command
+{
+    public:
+        PongCommand(Server *server);
+        ~PongCommand();
         void execute(Client *client, std::vector<std::string> arguments);
 };
 

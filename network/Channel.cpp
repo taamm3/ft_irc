@@ -1,7 +1,7 @@
 #include "Channel.hpp"
 
 Channel::Channel(const std::string& name,const std::string& key, Client *admin) :
-                _name(name), _key(key), _maxClients(0), _admin(admin), noExt(false) {}
+                _name(name), _key(key), _maxClients(0), _admin(admin), _noExt(false) {}
 
 Channel::~Channel() {}
 

@@ -27,5 +27,5 @@ void PartCommand::execute(Client *client, std::vector<std::string> arguments)
         return;
     }
     
-    _client->leave();
+    client->leave();
 }
