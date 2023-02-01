@@ -55,6 +55,7 @@ class Channel
         std::vector<std::string> getNicknames();
 
         void addClient(Client *client);
+        void removeClient(Client *client);
         void kick(Client *admin, Client *client, std::string reason);
         void broadcast(const std::string& message);
         void broadcast(const std::string& message, Client *client);

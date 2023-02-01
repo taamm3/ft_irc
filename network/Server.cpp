@@ -1,14 +1,15 @@
 #include "Server.hpp"
 
 Server::Server(const std::string& port, const std::string& password) :
-            _port(port), _password(password)
+            _running(1), _host("127.0.0.1"), _port(port), _password(password)
 {
-    
+    _socket = newSocket();
+    _commandHandler = new CommandHandler(this);
 }
         
 Server::~Server()
 {
-
+    delete _commandHandler;
 }
 
 void Server::start()
