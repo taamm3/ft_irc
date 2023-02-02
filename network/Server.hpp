@@ -1,10 +1,23 @@
 #ifndef SERVER_HPP
 #define SERVER_HPP
+#include <algorithm>
+// #include <sys/poll.h>
+// #include <sys/socket.h>
+// #include <arpa/inet.h>
+// #include <netdb.h>
+#include <fcntl.h>
+#include <vector>
+#include <map>
+// #include <poll.h>
+// #include <unistd.h>
+
+// #include <sys/poll.h>
+// #include <sys/socket.h>
+
+class Server;
 #include "Client.hpp"
 #include "Channel.hpp"
 #include "../commands/CommandHandler.hpp"
-#include <iostream>
-#include <map>
 
 class Server
 {
@@ -15,6 +28,7 @@ class Server
         const std::string _port;
         const std::string _password;
 
+        std::vector<pollfd> _pollfds;
         std::map<int, Client*> _clients;
         std::vector<Channel *> _channels;
         CommandHandler *_commandHandler;

@@ -1,7 +1,8 @@
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
 #include <iostream>
-#include "Channel.hpp"
+// #include <sys/poll.h>
+// #include <sys/socket.h>
 
 enum ClientState
 {
@@ -10,6 +11,9 @@ enum ClientState
     REGISTERED,
     DISCONNECTED
 };
+
+class Client;
+#include "Channel.hpp"
 
 class Client
 {
@@ -27,6 +31,18 @@ class Client
     public:
         Client(int fd, const std::string& hostname, int port);
         ~Client();
+        int getFd() const
+        {
+            return _fd;
+        }
+        std::string getHostname() const
+        {
+            return _hostname;
+        }
+        int getPort() const
+        {
+            return _port;
+        }
         void setNickname(const std::string& nickname)
         {
             _nickname = nickname;

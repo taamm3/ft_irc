@@ -2,6 +2,8 @@
 #define UTILS_HPP
 #include <iostream>
 #include <string>
+#include <time.h>
+#include <cstdlib>
 
 #define ERR_UNKNOWNCOMMAND(nick, command)   "421 " + nick + " " + command + " :Unknown command"
 #define ERR_NEEDMOREPARAMS(nick, command)   "461 " + nick + " " + command + " :Not enough parameters"
@@ -20,6 +22,20 @@
 #define ERR_CHANNELISFULL(client, channel)             "471 " + client + " " + channel + " :Cannot join channel (+l)"
 #define ERR_CANNOTSENDTOCHAN(client, channel)          "404 " + client + " " + channel + " :Cannot send to channel"
 
+
+static inline void ft_log(const std::string &message) {
+	time_t rawtime;
+	struct tm *timeinfo;
+	char buffer[80];
+
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+
+	strftime(buffer, sizeof(buffer), "%d-%m-%Y %H:%M:%S", timeinfo);
+	// std::string str(buffer);
+	// (void)message;
+	std::cout << "[" << buffer << "] " << message << std::endl;
+};
 
 
 #endif

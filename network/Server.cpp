@@ -46,3 +46,47 @@ Channel *Server::createChannel(const std::string& channelName,
     _channels.push_back(channel);
     return channel;
 }
+
+int Server::newSocket()
+{
+
+}
+
+void Server::onClientDisconnect(int fd)
+{
+
+}
+
+void Server::onClientConnect()
+{
+
+}
+
+void Server::onClientMessage(int fd)
+{
+    try
+    {
+        Client *client = _clients.at(fd);
+        _commandHandler->invoke(client, readMessage(fd));
+    }
+    catch(const std::out_of_range& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    
+}
+
+std::string Server::readMessage(int fd) {
+    std::string message;
+    char buffer[100] = {0};
+    
+    while (message.find("\r\n") == std::string::npos) {
+        std::memset(buffer, 0, 100);
+        if (recv(fd, buffer, 100, 0) < 0) {
+            if (errno != EWOULDBLOCK)
+                throw std::runtime_error("Error while reading buffer from client.");
+        }
+        message.append(buffer);
+    }
+    return message;
+}
