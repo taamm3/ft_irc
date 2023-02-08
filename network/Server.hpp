@@ -19,6 +19,8 @@ class Server;
 #include "Channel.hpp"
 #include "../commands/CommandHandler.hpp"
 
+#define MAX_CONNECTIONS 1000
+
 class Server
 {
     private:
